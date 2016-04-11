@@ -43,13 +43,21 @@ class Mauticommerce_Order extends Mauticommerce {
 	}
 
 	private function _create_query( $order ) {
-		//@TODO:Fit Mautic Form Name
 		$query = array(
-			'first_name' => $order->billing_first_name,
-			'name' => $order->billing_last_name,
-			'mail' => $order->billing_email,
+			'address1' => $order->billing_address_1,
+			'address2' => $order->billing_address_2,
+			'city' => $order->billing_city,
+			'company' => $order->billing_company,
+			'country' => $order->billing_country,
+			'email' => $order->billing_email,
+			'firstname' => $order->billing_first_name,
+			'lastname' => $order->billing_last_name,
+			'phone' => $order->billing_phone,
+			'zipcode' => $order->billing_postcode,
+			'state' => $order->billing_state,
+			'order_id' => $order->id,
 		);
-		return $query;
+		return apply_filters( 'mauticommerce_query_mapping', $query );
 	}
 
 	private function _subscribe( $query ) {
