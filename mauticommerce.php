@@ -4,8 +4,8 @@
  * Version: 0.0.1
  * Dmauticiption: Senf Woo Wommerce customer information to Mautic Form.
  * Author: hideokamoto
- * Author URI: YOUR SITE HERE
- * Plugin URI: PLUGIN SITE HERE
+ * Author URI: http://wp-kyoto.net/
+ * Plugin URI: https://github.com/megumiteam/mauticommerce
  * Text Domain: mauticommerce
  * Domain Path: /languages
  * @package Mauticommerce
