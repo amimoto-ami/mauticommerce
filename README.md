@@ -11,6 +11,7 @@ And Activate "Mauticommerce" Plugin in wp-admin.
 
 ###Initialize Setting
 You have to set following information.
+
 |Name|Descrtiption|Example|
 |:--|:--|:--|
 |Mautic URL|Your Mautic Domain|https://mautic.example.com/|
@@ -19,6 +20,7 @@ You have to set following information.
 ##Form Mapping in Mautic
 You can receive following params.
 Please make Mautic Form using following label name.
+
 |Mautic Form Label Name|
 |:--|
 |address1|
