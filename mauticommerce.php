@@ -66,7 +66,7 @@ class Mauticommerce {
 		add_action( 'admin_menu', array( $admin, 'add_admin_menu' ) );
 		add_action( 'admin_init', array( $admin, 'settings_init' ) );
 		$order = Mauticommerce_Order::get_instance();
-		add_action( 'woocommerce_checkout_update_order_meta', array( $order, 'subscribe_to_mautic'))
+		add_action( 'woocommerce_checkout_update_order_meta', array( $order, 'subscribe_to_mautic') );
 	}
 }
 
