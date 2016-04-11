@@ -43,10 +43,11 @@ class Mauticommerce_Order extends Mauticommerce {
 	}
 
 	private function _create_query( $order ) {
+		//@TODO:Fit Mautic Form Name
 		$query = array(
 			'first_name' => $order->billing_first_name,
-			'last_name' => $order->billing_last_name,
-			'email' => $order->billing_email,
+			'name' => $order->billing_last_name,
+			'mail' => $order->billing_email,
 		);
 		return $query;
 	}
@@ -57,8 +58,8 @@ class Mauticommerce_Order extends Mauticommerce {
 		if ( ! isset( $query['return'] ) ) {
 			$query['return'] = get_home_url();
 		}
+		$query['formId'] = $settings['form_id'];
 		$data = array(
-			'formId' => $settings['form_id'],
 			'mauticform' => $query,
 		);
 		$url = path_join( $settings['url'], "form/submit?formId={$settings['form_id']}" );
