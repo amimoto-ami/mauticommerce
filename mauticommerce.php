@@ -24,6 +24,7 @@ if ( ! mautic_is_activate_woocommerce() ) {
 define( 'Mauticommerce_ROOT', __FILE__ );
 
 require_once 'inc/class.admin.php';
+require_once 'inc/class.order.php';
 
 $Mauticommerce = Mauticommerce::get_instance();
 $Mauticommerce->init();
