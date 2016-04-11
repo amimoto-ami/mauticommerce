@@ -23,6 +23,8 @@ if ( ! mautic_is_activate_woocommerce() ) {
 }
 define( 'Mauticommerce_ROOT', __FILE__ );
 
+require_once 'inc/class.admin.php';
+
 $Mauticommerce = Mauticommerce::get_instance();
 $Mauticommerce->init();
 
@@ -42,7 +44,26 @@ class Mauticommerce {
 		return self::$instance;
 	}
 
+	/**
+	 * Get Plugin text_domain
+	 *
+	 * @return string
+	 * @since 0.0.1
+	 */
+	public static function text_domain() {
+		static $text_domain;
+
+		if ( ! $text_domain ) {
+			$data = get_file_data( Mauticommerce_ROOT , array( 'text_domain' => 'Text Domain' ) );
+			$text_domain = $data['text_domain'];
+		}
+		return $text_domain;
+	}
+
 	public function init() {
+		$admin = Mauticommerce_Admin::get_instance();
+		add_action( 'admin_menu', array( $admin, 'add_admin_menu' ) );
+		add_action( 'admin_init', array( $admin, 'settings_init' ) );
 	}
 }
 
