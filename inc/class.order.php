@@ -20,7 +20,6 @@ class Mauticommerce_Order extends Mauticommerce {
 	 */
 	private function __construct() {
 		self::$text_domain = Mauticommerce::text_domain();
-		$this->mauticommece_settings = get_option( 'mauticommece_settings' );
 	}
 
 	/**
@@ -35,5 +34,77 @@ class Mauticommerce_Order extends Mauticommerce {
 			self::$instance = new $c();
 		}
 		return self::$instance;
+	}
+
+	public function subscribe_to_mautic( $order_id, $status = 'new', $new_status = 'pending' ) {
+		$order = wc_get_order( $order_id );
+		$query = $this->_create_query( $order );
+		$this->_subscribe( $query );
+	}
+
+	private function _create_query( $order ) {
+		$query = array(
+			'first_name' => $order->billing_first_name,
+			'last_name' => $order->billing_last_name,
+			'email' => $order->billing_email,
+		);
+		return $query;
+	}
+
+	private function _subscribe( $query ) {
+		$ip = $this->_get_ip();
+		$settings = get_option( 'mauticommece_settings' );
+		if ( ! isset( $query['return'] ) ) {
+			$query['return'] = get_home_url();
+		}
+		$data = array(
+			'formId' => $settings['form_id'],
+			'mauticform' => $query,
+		);
+		$url = path_join( $settings['url'], "form/submit?formId={$settings['form_id']}" );
+
+		$response = wp_remote_post(
+			$url,
+			array(
+				'method' => 'POST',
+				'timeout' => 45,
+				'headers' => array(
+					'X-Forwarded-For' => $ip,
+				),
+				'body' => $data,
+				'cookies' => array()
+			)
+		);
+		if ( is_wp_error( $response ) ) {
+			$error_message = $response->get_error_message();
+			error_log( "MautiCommerce Error: $error_message" );
+		}
+	}
+
+	private function _get_ip() {
+		$ip_list = [
+			'HTTP_CLIENT_IP',
+			'HTTP_X_FORWARDED_FOR',
+			'HTTP_X_FORWARDED',
+			'HTTP_X_CLUSTER_CLIENT_IP',
+			'HTTP_FORWARDED_FOR',
+			'HTTP_FORWARDED'
+		];
+		foreach ( $ip_list as $key ) {
+			if ( ! isset( $_SERVER[ $key ] ) ) {
+				continue;
+			}
+			$ip = esc_attr( $_SERVER[ $key ] );
+			if ( ! strpos( $ip, ',' ) ) {
+				$ips =  explode( ',', $ip );
+				foreach ( $ips as &$val ) {
+					$val = trim( $val );
+				}
+				$ip = end ( $ips );
+			}
+			$ip = trim( $ip );
+			break;
+		}
+		return $ip;
 	}
 }
