@@ -1,5 +1,5 @@
 === Mauticommerce ===
-Contributors: megumiteam,hideokamoto
+Contributors: megumithemes,hideokamoto
 Tags: marketing,mautic,woocommerce
 Requires at least: 4.4.2
 Tested up to:4.4.2
