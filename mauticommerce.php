@@ -13,8 +13,8 @@
 if ( ! mautic_is_activate_woocommerce() ) {
 	$Mauticommerce_Err = new Mauticommerce_Err();
 	$msg = array(
-		__( 'MautiCommerce Need "WooCommerce" Plugin.' , 'mautiCommerce-relateditem' ),
-		__( 'Please Activate it.' , 'mautiCommerce-relateditem' ),
+		__( 'MautiCommerce Need "WooCommerce" Plugin.' , 'mauticommerce' ),
+		__( 'Please Activate it.' , 'mauticommerce' ),
 	);
 	$e = new WP_Error( 'MautiCommerce Activation Error', $msg );
 	$Mauticommerce_Err->show_error_message( $e );

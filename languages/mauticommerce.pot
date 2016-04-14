@@ -1,0 +1,65 @@
+# Copyright (C) 2016 hideokamoto
+# This file is distributed under the same license as the Mauticommerce package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Mauticommerce 0.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mauticommerce\n"
+"POT-Creation-Date: 2016-04-14 10:15:29+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+
+#: inc/class.admin.php:85
+msgid "Settings"
+msgstr ""
+
+#: inc/class.admin.php:91
+msgid "Mautic URL"
+msgstr ""
+
+#: inc/class.admin.php:98
+msgid "Mautic Form ID"
+msgstr ""
+
+#: inc/class.admin.php:135
+msgid "Set Mautic Information."
+msgstr ""
+
+#: mauticommerce.php:16
+msgid "MautiCommerce Need \"WooCommerce\" Plugin."
+msgstr ""
+
+#: mauticommerce.php:17
+msgid "Please Activate it."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Mauticommerce"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/megumiteam/mauticommerce"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "hideokamoto"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://wp-kyoto.net/"
+msgstr ""
