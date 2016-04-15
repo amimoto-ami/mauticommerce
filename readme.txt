@@ -42,6 +42,8 @@ Please make Mautic Form using following label name.
 |state|
 |order_id|
 
+== Thanks for ==
+* [.svnignore for WordPress plugins](https://github.com/miya0001/wp-svnignore)
 
 == Changelog ==
 
