@@ -3,7 +3,7 @@ Contributors: megumithemes,hideokamoto
 Tags: marketing,mautic,woocommerce
 Requires at least: 4.4.2
 Tested up to:4.4.2
-Stable tag: 0.0.1
+Stable tag: 0.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,10 +45,13 @@ Please make Mautic Form using following label name.
 
 == Changelog ==
 
-= 0.1 =
+= 0.0.2 =
+* Add pot file
+
+= 0.0.1 =
 * Initialize Release
 
 == Upgrade Notice ==
 
-= 0.1 =
-* Initialize Release
+= 0.0.2 =
+* add pot file
