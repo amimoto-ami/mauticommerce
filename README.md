@@ -41,3 +41,16 @@ Please make Mautic Form using following label name.
 |zipcode|
 |state|
 |order_id|
+
+## Customize
+### Add form param
+
+use `mauticommerce_query_mapping` filter.
+```
+add_filter( 'mauticommerce_query_mapping', 'add_mapping_query', 10, 2 );
+function add_mapping_query( $query, $order ) {
+        //Add $order Param to $query
+        $query['customer_ip_address'] = $order->customer_ip_address;
+        return $query;
+}
+```
