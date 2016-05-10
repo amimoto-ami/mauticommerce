@@ -3,7 +3,7 @@ Contributors: amimotoami,megumithemes,hideokamoto
 Tags: marketing,mautic,woocommerce
 Requires at least: 4.4.2
 Tested up to:4.4.2
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,10 +42,24 @@ Please make Mautic Form using following label name.
 |state|
 |order_id|
 
+== Customize ==
+=== Add form param ===
+```
+add_filter( 'mauticommerce_query_mapping', 'add_mapping_query', 10, 2 );
+function add_mapping_query( $query, $order ) {
+	//Add $order Param to $query
+	$query['customer_ip_address'] = $order->customer_ip_address;
+	return $query;
+}
+```
+
 == Thanks for ==
 * [.svnignore for WordPress plugins](https://github.com/miya0001/wp-svnignore)
 
 == Changelog ==
+
+= 0.0.3 =
+* add filter query param
 
 = 0.0.2 =
 * Add pot file
@@ -55,5 +69,5 @@ Please make Mautic Form using following label name.
 
 == Upgrade Notice ==
 
-= 0.0.2 =
-* add pot file
+= 0.0.3 =
+* add filter query param
