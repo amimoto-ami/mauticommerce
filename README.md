@@ -1,5 +1,11 @@
 # Mauticommerce
+[![WordPress plugin](https://img.shields.io/wordpress/plugin/v/mauticommerce.svg)](https://wordpress.org/plugins/mauticommerce/)
+[![WordPress rating](https://img.shields.io/wordpress/plugin/r/mauticommerce.svg)]()
 You can get WooCommerce Order Information in Mautic.
+
+##Reporting bugs
+We try to fix as many bugs we can, this is a graph of our recent activity: 
+[![Throughput Graph](https://graphs.waffle.io/amimoto-ami/mauticommerce/throughput.svg)](https://waffle.io/amimoto-ami/mauticommerce/metrics/throughput)
 
 ##How to use
 Do following commands.
