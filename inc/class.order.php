@@ -57,7 +57,7 @@ class Mauticommerce_Order extends Mauticommerce {
 			'state' => $order->billing_state,
 			'order_id' => $order->id,
 		);
-		return apply_filters( 'mauticommerce_query_mapping', $query );
+		return apply_filters( 'mauticommerce_query_mapping', $query, $order );
 	}
 
 	private function _subscribe( $query ) {
