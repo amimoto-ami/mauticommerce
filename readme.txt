@@ -11,36 +11,52 @@ You can get WooCommerce Order Information in Mautic.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Mauticommerce is used to bridge user data from WooCommerce to the Mautic open source marketing automation system.
+When your customer enters an order in Woocommerce, their contact data is used to create a new Mautic Lead.
+
+This plugin is available through the official Wordpress.org Plugin Directory.
+Simply download and install the plugin as you would any other plugin.
+Mautic is a free open source marketing automation tool.
+It can be downloaded at: www.mautic.org/download.
+Mautic may or may not be installed before the Mauticommerce plugin.
+You will need a functioning Mautic installation and a new Mautic Form for this plugin to work.
 
 == Installation ==
 
 1. Upload this directlies to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. And You have to set following information.
 
-|Name|Descrtiption|Example|
-|:--|:--|:--|
-|Mautic URL|Your Mautic Domain|https://mautic.example.com/|
-|ID|Your Mautic Form ID|1|
+You will need to create a Mautic form from within your Mautic installation.
+Please add the following fields to the form: 
+1. address1 as a text field;
+2. address2 as a text field;
+3. city as a text field;
+4. company as a text field;
+5. country as a text field;
+6. email as an email field;
+7. firstname as a text field;
+8. lastname as a text field;
+9. phone as a phone field;
+10. zipcode as a text field;
+11. state as a text field; and
+12. order_id as a text field.
 
-=== Form Mapping in Mautic ===
-You can receive following params.
-Please make Mautic Form using following label name.
-|Mautic Form Label Name|
-|:--|
-|address1|
-|address2|
-|city|
-|company|
-|country|
-|email|
-|firstname|
-|lastname |
-|phone|
-|zipcode|
-|state|
-|order_id|
+Remember to Save & Close the form in Mautic.
+
+Once you have created the form and saved it and note it’s Mautic Form ID (which can be found in the rightmost column on the general Forms page).
+You will also need to know the directory where you installed Mautic (http://abc.net/Mautic/).
+
+To set up this plugin, simply download it and install it into your Wordpress site. Then go to the General Settings options of your Wordpress site. Under Settings choose Mauticommerce. Here you will find two fields for your Mautic URL and your Mautic Form ID which you recorded in the steps above.
+
+That’s all there is to setting up Mauticommerce!
+1. Install the Mautic Commerce plugin
+2. Create a Mautic Form ID
+3. Enter the URL and Form ID into Mauticommerce under the Wordpress Setting page.
+4. Click “Save Changes” and you are done!
+
+You will never need to visit this form again, your customers data will simply appear as a Lead in Mautic.
+
+Now when a customer creates a new order in Woocommerce, their data will be sent to Mautic (through the Mautic Form you created).
 
 == Customize ==
 === Add form param ===
