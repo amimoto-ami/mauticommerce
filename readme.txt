@@ -1,5 +1,5 @@
 === Mauticommerce ===
-Contributors: amimotoami,megumithemes,hideokamoto
+Contributors: amimotoami,megumithemes,hideokamoto,2craig
 Tags: marketing,mautic,woocommerce
 Requires at least: 4.4.2
 Tested up to:4.4.2
@@ -27,7 +27,7 @@ You will need a functioning Mautic installation and a new Mautic Form for this p
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 You will need to create a Mautic form from within your Mautic installation.
-Please add the following fields to the form: 
+Please add the following fields to the form:
 1. address1 as a text field;
 2. address2 as a text field;
 3. city as a text field;
