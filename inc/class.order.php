@@ -54,7 +54,7 @@ class Mauticommerce_Order extends Mauticommerce {
 			'lastname' => $order->billing_last_name,
 			'phone' => $order->billing_phone,
 			'zipcode' => $order->billing_postcode,
-			'state' => $order->billing_state,
+			'state' => $this->_get_states_name( $order->billing_country, $order->billing_state ),
 			'order_id' => $order->id,
 		);
 		return apply_filters( 'mauticommerce_query_mapping', $query, $order );
@@ -82,6 +82,26 @@ class Mauticommerce_Order extends Mauticommerce {
 		}
 	}
 
+	private function _get_states_name( $country_code, $state_code ) {
+		$states = wp_remote_get( path_join( Mauticommerce__URL, 'inc/assets/json/states.json' ) );
+		try {
+			if ( is_wp_error( $states ) ) {
+				throw new Exception( 'invalid json data.' );
+			}
+			$json = json_decode( $states['body'], true );
+			if ( ! isset( $json[ $country_code ][ $state_code ] ) ) {
+				throw new Exception( "Country[{$country_code}] is not found." );
+			}
+			$state_name = $json[ $country_code ][ $state_code ];
+			return $state_name;
+		} catch ( Exception $e ) {
+			$msg = "Mauticommerce Error:". $e->getMessage();
+			error_log( $msg );
+			$WC_Country = new WC_Countries();
+			return $WC_Country->get_states( $country_code )[ $state_code ];
+		}
+	}
+
 	private function _subscribe( $query ) {
 		$ip = $this->_get_ip();
 		$settings = get_option( 'mauticommece_settings' );
@@ -93,8 +113,7 @@ class Mauticommerce_Order extends Mauticommerce {
 			'mauticform' => $query,
 		);
 		$url = path_join( $settings['url'], "form/submit?formId={$settings['form_id']}" );
-var_dump($data);
-exit;
+
 		$response = wp_remote_post(
 			$url,
 			array(
