@@ -21,6 +21,8 @@ if ( ! mautic_is_activate_woocommerce() ) {
 	add_action( 'admin_notices', array( $Mauticommerce_Err, 'admin_notices' ) );
 	return false;
 }
+define( 'Mauticommerce__PATH', plugin_dir_path( __FILE__ ) );
+define( 'Mauticommerce__URL', plugin_dir_url( __FILE__ ) );
 define( 'Mauticommerce_ROOT', __FILE__ );
 
 require_once 'inc/class.admin.php';
