@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Mauticommerce
- * Version: 0.0.3
+ * Version: 0.1.0
  * Descrtiption: Senf Woo Wommerce customer information to Mautic Form.
  * Author: hideokamoto
  * Author URI: http://wp-kyoto.net/
