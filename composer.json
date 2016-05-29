@@ -1,0 +1,15 @@
+{
+    "name": "hideokamoto/mauticommerce",
+    "license": "GPL v3",
+    "authors": [
+        {
+            "name": "hideokamoto",
+            "email": "kokkoku214@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+      "codeception/codeception": "*",
+      "lucatume/wp-browser": "~1.11"
+    }
+}
