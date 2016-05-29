@@ -1,18 +1,14 @@
 <?php
 
-class activationTest extends WP_UnitTestCase
-{
-    public function setUp()
-    {
-    }
+class activationTest extends WP_UnitTestCase {
+	public function setUp() {
+	}
 
-    public function tearDown()
-    {
-    }
+	public function tearDown() {
+	}
 
-    // tests
-    public function testIsActivatedWooCommercePlugin()
-    {
+	// tests
+	public function testIsActivatedWooCommercePlugin() {
 		$this->assertTrue( mautic_is_activate_woocommerce() );
-    }
+	}
 }
