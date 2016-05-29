@@ -14,10 +14,15 @@ extensions:
         - Codeception\Extension\RunFailed
 modules:
       enabled:
-          - WPBrowser
+          - WPDb
       config:
-          WPBrowser:
+          WPDb:
+              dsn: 'mysql:host=localhost;dbname=testdb'
+              user: 'root'
+              password: ''
+              dump: 'tests/_data/dump.sql'
+              populate: true
+              cleanup: true
+              reconnect: true
               url: 'http://wordpress.local'
-              adminUsername: 'root'
-              adminPassword: 'root'
-              adminUrl: '/wp-core/wp-admin'
+              tablePrefix: 'wp_'
