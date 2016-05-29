@@ -2,5 +2,5 @@
 node_modules/
 
 tests/_output/*
-test/_support/*
+tests/_support/
 vendor/
