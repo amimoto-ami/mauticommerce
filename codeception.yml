@@ -13,9 +13,11 @@ extensions:
     enabled:
         - Codeception\Extension\RunFailed
 modules:
-    config:
-        Db:
-            dsn: ''
-            user: ''
-            password: ''
-            dump: tests/_data/dump.sql
+      enabled:
+          - WPBrowser
+      config:
+          WPBrowser:
+              url: 'http://wordpress.local'
+              adminUsername: 'root'
+              adminPassword: 'root'
+              adminUrl: '/wp-core/wp-admin'

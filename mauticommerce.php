@@ -126,6 +126,7 @@ class Mauticommerce_Err {
  * @return bool
  */
 function mautic_is_activate_woocommerce() {
+	set_transient( 'mautic-admin-errors' ,' $e->get_error_messages()', 10 );
 	$activePlugins = get_option('active_plugins');
 	$plugin = 'woocommerce/woocommerce.php';
 	if ( ! array_search( $plugin, $activePlugins ) && file_exists( WP_PLUGIN_DIR. '/'. $plugin ) ) {
