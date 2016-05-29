@@ -12,13 +12,7 @@
  */
 if ( ! mautic_is_activate_woocommerce() ) {
 	$Mauticommerce_Err = new Mauticommerce_Err();
-	$msg = array(
-		__( 'MautiCommerce Need "WooCommerce" Plugin.' , 'mauticommerce' ),
-		__( 'Please Activate it.' , 'mauticommerce' ),
-	);
-	$e = new WP_Error( 'MautiCommerce Activation Error', $msg );
-	$Mauticommerce_Err->show_error_message( $e );
-	add_action( 'admin_notices', array( $Mauticommerce_Err, 'admin_notices' ) );
+	$Mauticommerce_Err->activation_fail();
 	return false;
 }
 define( 'Mauticommerce__PATH', plugin_dir_path( __FILE__ ) );
@@ -73,6 +67,21 @@ class Mauticommerce {
 }
 
 class Mauticommerce_Err {
+	/**
+	 * Set Error to fail to Actiavation Plugin
+	 *
+	 * @since 0.1.1
+	 **/
+	public function activation_fail() {
+		$msg = array(
+			__( 'MautiCommerce Need "WooCommerce" Plugin.' , 'mauticommerce' ),
+			__( 'Please Activate it.' , 'mauticommerce' ),
+		);
+		$e = new WP_Error( 'MautiCommerce Activation Error', $msg );
+		$this->show_error_message( $e );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		return $e;
+	}
 
 	/**
 	 * Show notice for wp-admin if have error messages
