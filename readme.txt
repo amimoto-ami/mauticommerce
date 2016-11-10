@@ -21,6 +21,9 @@ It can be downloaded at: www.mautic.org/download.
 Mautic may or may not be installed before the Mauticommerce plugin.
 You will need a functioning Mautic installation and a new Mautic Form for this plugin to work.
 
+## Document
+- [API reference: https://amimoto-ami.github.io/mauticommerce/index.html](https://amimoto-ami.github.io/mauticommerce/index.html)
+
 == Installation ==
 
 1. Upload this directlies to the `/wp-content/plugins/` directory

@@ -4,7 +4,7 @@
 You can get WooCommerce Order Information in Mautic.
 
 ##Reporting bugs
-We try to fix as many bugs we can, this is a graph of our recent activity: 
+We try to fix as many bugs we can, this is a graph of our recent activity:
 [![Throughput Graph](https://graphs.waffle.io/amimoto-ami/mauticommerce/throughput.svg)](https://waffle.io/amimoto-ami/mauticommerce/metrics/throughput)
 
 ##How to use
@@ -54,3 +54,7 @@ function add_mapping_query( $query, $order ) {
         return $query;
 }
 ```
+
+## Document
+
+- [API reference: https://amimoto-ami.github.io/mauticommerce/index.html](https://amimoto-ami.github.io/mauticommerce/index.html)
