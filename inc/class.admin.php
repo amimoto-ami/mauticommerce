@@ -111,7 +111,7 @@ class Mauticommerce_Admin extends Mauticommerce {
 		if ( ! isset( $this->mauticommece_settings['form_id'] ) ) {
 			$this->mauticommece_settings['form_id'] = '';
 		}
-		echo "<input type='text' name='mauticommece_settings[form_id]' value='". $this->mauticommece_settings['form_id']. "'>";
+		echo "<input type='text' name='mauticommece_settings[form_id]' value='" . $this->mauticommece_settings['form_id'] . "'>";
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Mauticommerce_Admin extends Mauticommerce {
 		if ( ! isset( $this->mauticommece_settings['url'] ) ) {
 			$this->mauticommece_settings['url'] = '';
 		}
-		echo "<input type='url' name='mauticommece_settings[url]' value='". $this->mauticommece_settings['url']. "' style='width:100%;'>";
+		echo "<input type='url' name='mauticommece_settings[url]' value='" . $this->mauticommece_settings['url'] . "' style='width:100%;'>";
 	}
 
 	/**

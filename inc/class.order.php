@@ -63,8 +63,6 @@ class Mauticommerce_Order extends Mauticommerce {
 	private function _get_country_name( $country_code ) {
 		$countries = wp_remote_get( path_join( Mauticommerce__URL, 'inc/assets/json/country.json' ) );
 		try {
-
-
 			if ( is_wp_error( $countries ) ) {
 				throw new Exception( 'invalid json data.' );
 			}
@@ -75,10 +73,10 @@ class Mauticommerce_Order extends Mauticommerce {
 			$country_name = $json[ $country_code ];
 			return $country_name;
 		} catch ( Exception $e ) {
-			$msg = "Mauticommerce Error:". $e->getMessage();
+			$msg = 'Mauticommerce Error:' . $e->getMessage();
 			error_log( $msg );
-			$WC_Country = new WC_Countries();
-			return $WC_Country->get_countries()[$country_code];
+			$wc_country = new WC_Countries();
+			return $wc_country->get_countries()[ $country_code ];
 		}
 	}
 
@@ -95,10 +93,10 @@ class Mauticommerce_Order extends Mauticommerce {
 			$state_name = $json[ $country_code ][ $state_code ];
 			return $state_name;
 		} catch ( Exception $e ) {
-			$msg = "Mauticommerce Error:". $e->getMessage();
+			$msg = 'Mauticommerce Error:' . $e->getMessage();
 			error_log( $msg );
-			$WC_Country = new WC_Countries();
-			return $WC_Country->get_states( $country_code )[ $state_code ];
+			$wc_country = new WC_Countries();
+			return $wc_country->get_states( $country_code )[ $state_code ];
 		}
 	}
 
@@ -123,7 +121,7 @@ class Mauticommerce_Order extends Mauticommerce {
 					'X-Forwarded-For' => $ip,
 				),
 				'body' => $data,
-				'cookies' => array()
+				'cookies' => array(),
 			)
 		);
 		if ( is_wp_error( $response ) ) {
@@ -139,7 +137,7 @@ class Mauticommerce_Order extends Mauticommerce {
 			'HTTP_X_FORWARDED',
 			'HTTP_X_CLUSTER_CLIENT_IP',
 			'HTTP_FORWARDED_FOR',
-			'HTTP_FORWARDED'
+			'HTTP_FORWARDED',
 		];
 		foreach ( $ip_list as $key ) {
 			if ( ! isset( $_SERVER[ $key ] ) ) {
@@ -147,11 +145,11 @@ class Mauticommerce_Order extends Mauticommerce {
 			}
 			$ip = esc_attr( $_SERVER[ $key ] );
 			if ( ! strpos( $ip, ',' ) ) {
-				$ips =  explode( ',', $ip );
+				$ips = explode( ',', $ip );
 				foreach ( $ips as &$val ) {
 					$val = trim( $val );
 				}
-				$ip = end ( $ips );
+				$ip = end( $ips );
 			}
 			$ip = trim( $ip );
 			break;
