@@ -132,6 +132,7 @@ class Mauticommerce_Order extends Mauticommerce {
 
 	private function _get_ip() {
 		$ip_list = [
+			'REMOTE_ADDR',
 			'HTTP_CLIENT_IP',
 			'HTTP_X_FORWARDED_FOR',
 			'HTTP_X_FORWARDED',
