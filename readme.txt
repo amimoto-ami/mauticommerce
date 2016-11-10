@@ -3,7 +3,7 @@ Contributors: amimotoami,megumithemes,hideokamoto,2craig
 Tags: marketing,mautic,woocommerce
 Requires at least: 4.4.2
 Tested up to:4.4.2
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,9 @@ function add_mapping_query( $query, $order ) {
 * [.svnignore for WordPress plugins](https://github.com/miya0001/wp-svnignore)
 
 == Changelog ==
+= 0.1.1 =
+* Bug fix
+* Create document site
 
 = 0.0.3 =
 * add filter query param
@@ -85,5 +88,6 @@ function add_mapping_query( $query, $order ) {
 
 == Upgrade Notice ==
 
-= 0.0.3 =
-* add filter query param
+= 0.1.1 =
+* Bug fix
+* Create document site
