@@ -36,13 +36,30 @@ class Mauticommerce_Order extends Mauticommerce {
 		return self::$instance;
 	}
 
+	/**
+	 * Subscribe order information to Mautic
+	 *
+	 * @param string $order_id Order
+	 * @param string $status post status (default:'new')
+	 * @param string $new_status new post status (default:'pending')
+	 * @access public
+	 * @since 0.0.1
+	 **/
 	public function subscribe_to_mautic( $order_id, $status = 'new', $new_status = 'pending' ) {
 		$order = wc_get_order( $order_id );
 		$query = $this->_create_query( $order );
 		$this->_subscribe( $query );
 	}
 
-	private function _create_query( $order ) {
+	/**
+	 * create query to send Mautic
+	 *
+	 * @param WC_Order $order WooCommerce order object
+	 * @since 0.0.1
+	 * @access private
+	 * @return array $query posted mautic query
+	 **/
+	private function _create_query( WC_Order $order ) {
 		$query = array(
 			'address1' => $order->billing_address_1,
 			'address2' => $order->billing_address_2,
@@ -57,14 +74,29 @@ class Mauticommerce_Order extends Mauticommerce {
 			'state' => $this->_get_states_name( $order->billing_country, $order->billing_state ),
 			'order_id' => $order->id,
 		);
+
+		/**
+		 * Filter the query that customize Mautic query
+		 *
+		 * @since 0.0.1
+		 * @param $query default mautic query
+		 * @param WC_Order $order WooCommerce order object
+		 **/
 		return apply_filters( 'mauticommerce_query_mapping', $query, $order );
 	}
 
+	/**
+	 * Get country name
+	 *
+	 * @since 0.0.1
+	 * @access private
+	 * @param string $country_code
+	 * @return string $country_name | Exception
+	 * @
+	 **/
 	private function _get_country_name( $country_code ) {
-		$countries = wp_remote_get( path_join( Mauticommerce__URL, 'inc/assets/json/country.json' ) );
+		$countries = wp_remote_get( path_join( MAUTICOMMERCE_URL, 'inc/assets/json/country.json' ) );
 		try {
-
-
 			if ( is_wp_error( $countries ) ) {
 				throw new Exception( 'invalid json data.' );
 			}
@@ -75,15 +107,24 @@ class Mauticommerce_Order extends Mauticommerce {
 			$country_name = $json[ $country_code ];
 			return $country_name;
 		} catch ( Exception $e ) {
-			$msg = "Mauticommerce Error:". $e->getMessage();
+			$msg = 'Mauticommerce Error:' . $e->getMessage();
 			error_log( $msg );
-			$WC_Country = new WC_Countries();
-			return $WC_Country->get_countries()[$country_code];
+			$wc_country = new WC_Countries();
+			return $wc_country->get_countries()[ $country_code ];
 		}
 	}
 
+	/**
+	 * Get state name
+	 *
+	 * @since 0.0.1
+	 * @access private
+	 * @param string $country_code country code
+	 * @param string $state_code state code
+	 * @return string | Exception
+	 **/
 	private function _get_states_name( $country_code, $state_code ) {
-		$states = wp_remote_get( path_join( Mauticommerce__URL, 'inc/assets/json/states.json' ) );
+		$states = wp_remote_get( path_join( MAUTICOMMERCE_URL, 'inc/assets/json/states.json' ) );
 		try {
 			if ( is_wp_error( $states ) ) {
 				throw new Exception( 'invalid json data.' );
@@ -95,13 +136,20 @@ class Mauticommerce_Order extends Mauticommerce {
 			$state_name = $json[ $country_code ][ $state_code ];
 			return $state_name;
 		} catch ( Exception $e ) {
-			$msg = "Mauticommerce Error:". $e->getMessage();
+			$msg = 'Mauticommerce Error:' . $e->getMessage();
 			error_log( $msg );
-			$WC_Country = new WC_Countries();
-			return $WC_Country->get_states( $country_code )[ $state_code ];
+			$wc_country = new WC_Countries();
+			return $wc_country->get_states( $country_code )[ $state_code ];
 		}
 	}
 
+	/**
+	 * Subscribe to Mautic
+	 *
+	 * @param array $query Posted mautic query
+	 * @access private
+	 * @since 0.0.1
+	 **/
 	private function _subscribe( $query ) {
 		$ip = $this->_get_ip();
 		$settings = get_option( 'mauticommece_settings' );
@@ -123,7 +171,7 @@ class Mauticommerce_Order extends Mauticommerce {
 					'X-Forwarded-For' => $ip,
 				),
 				'body' => $data,
-				'cookies' => array()
+				'cookies' => array(),
 			)
 		);
 		if ( is_wp_error( $response ) ) {
@@ -132,14 +180,22 @@ class Mauticommerce_Order extends Mauticommerce {
 		}
 	}
 
+	/**
+	 * get ip
+	 *
+	 * @access private
+	 * @return string
+	 * @since 0.0.1
+	 **/
 	private function _get_ip() {
 		$ip_list = [
+			'REMOTE_ADDR',
 			'HTTP_CLIENT_IP',
 			'HTTP_X_FORWARDED_FOR',
 			'HTTP_X_FORWARDED',
 			'HTTP_X_CLUSTER_CLIENT_IP',
 			'HTTP_FORWARDED_FOR',
-			'HTTP_FORWARDED'
+			'HTTP_FORWARDED',
 		];
 		foreach ( $ip_list as $key ) {
 			if ( ! isset( $_SERVER[ $key ] ) ) {
@@ -147,11 +203,11 @@ class Mauticommerce_Order extends Mauticommerce {
 			}
 			$ip = esc_attr( $_SERVER[ $key ] );
 			if ( ! strpos( $ip, ',' ) ) {
-				$ips =  explode( ',', $ip );
+				$ips = explode( ',', $ip );
 				foreach ( $ips as &$val ) {
 					$val = trim( $val );
 				}
-				$ip = end ( $ips );
+				$ip = end( $ips );
 			}
 			$ip = trim( $ip );
 			break;

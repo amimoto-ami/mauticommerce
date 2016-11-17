@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Mauticommerce
- * Version: 0.1.0
+ * Version: 0.1.1
  * Descrtiption: Senf Woo Wommerce customer information to Mautic Form.
  * Author: hideokamoto
  * Author URI: http://wp-kyoto.net/
@@ -11,28 +11,21 @@
  * @package Mauticommerce
  */
 if ( ! mautic_is_activate_woocommerce() ) {
-	$Mauticommerce_Err = new Mauticommerce_Err();
-	$msg = array(
-		__( 'MautiCommerce Need "WooCommerce" Plugin.' , 'mauticommerce' ),
-		__( 'Please Activate it.' , 'mauticommerce' ),
-	);
-	$e = new WP_Error( 'MautiCommerce Activation Error', $msg );
-	$Mauticommerce_Err->show_error_message( $e );
-	add_action( 'admin_notices', array( $Mauticommerce_Err, 'admin_notices' ) );
+	$mauticommerce_err = new Mauticommerce_Err();
+	$mauticommerce_err->activation_fail();
 	return false;
 }
-define( 'Mauticommerce__PATH', plugin_dir_path( __FILE__ ) );
-define( 'Mauticommerce__URL', plugin_dir_url( __FILE__ ) );
-define( 'Mauticommerce_ROOT', __FILE__ );
+define( 'MAUTICOMMERCE_PATH', plugin_dir_path( __FILE__ ) );
+define( 'MAUTICOMMERCE_URL', plugin_dir_url( __FILE__ ) );
+define( 'MAUTICOMMERCE_ROOT', __FILE__ );
 
 require_once 'inc/class.admin.php';
 require_once 'inc/class.order.php';
 
-$Mauticommerce = Mauticommerce::get_instance();
-$Mauticommerce->init();
+$mauticommerce = Mauticommerce::get_instance();
+$mauticommerce->init();
 
 class Mauticommerce {
-	private $Base;
 	private static $instance;
 	private static $text_domain;
 
@@ -57,7 +50,7 @@ class Mauticommerce {
 		static $text_domain;
 
 		if ( ! $text_domain ) {
-			$data = get_file_data( Mauticommerce_ROOT , array( 'text_domain' => 'Text Domain' ) );
+			$data = get_file_data( MAUTICOMMERCE_ROOT , array( 'text_domain' => 'Text Domain' ) );
 			$text_domain = $data['text_domain'];
 		}
 		return $text_domain;
@@ -68,11 +61,26 @@ class Mauticommerce {
 		add_action( 'admin_menu', array( $admin, 'add_admin_menu' ) );
 		add_action( 'admin_init', array( $admin, 'settings_init' ) );
 		$order = Mauticommerce_Order::get_instance();
-		add_action( 'woocommerce_checkout_update_order_meta', array( $order, 'subscribe_to_mautic') );
+		add_action( 'woocommerce_checkout_update_order_meta', array( $order, 'subscribe_to_mautic' ) );
 	}
 }
 
 class Mauticommerce_Err {
+	/**
+	 * Set Error to fail to Actiavation Plugin
+	 *
+	 * @since 0.1.1
+	 **/
+	public function activation_fail() {
+		$msg = array(
+			__( 'MautiCommerce Need "WooCommerce" Plugin.' , 'mauticommerce' ),
+			__( 'Please Activate it.' , 'mauticommerce' ),
+		);
+		$e = new WP_Error( 'MautiCommerce Activation Error', $msg );
+		$this->show_error_message( $e );
+		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		return $e;
+	}
 
 	/**
 	 * Show notice for wp-admin if have error messages
@@ -80,8 +88,8 @@ class Mauticommerce_Err {
 	 * @since 0.0.1
 	 **/
 	public function admin_notices() {
-		if ( $messageList = get_transient( 'mautic-admin-errors' ) ) {
-			$this->show_notice_html( $messageList );
+		if ( $message_list = get_transient( 'mautic-admin-errors' ) ) {
+			$this->show_notice_html( $message_list );
 		}
 	}
 
@@ -107,10 +115,10 @@ class Mauticommerce_Err {
 	 * @param array
 	 * @since 0.1.0
 	 */
-	public function show_notice_html( $messageList ) {
-		foreach ( $messageList as $key => $messages ) {
+	public function show_notice_html( $message_list ) {
+		foreach ( $message_list as $key => $messages ) {
 			$html  = "<div class='error'><ul>";
-			foreach ( (array)$messages as $key => $message ) {
+			foreach ( (array) $messages as $key => $message ) {
 				$html .= "<li>{$message}</li>";
 			}
 			$html .= '</ul></div>';
@@ -126,9 +134,9 @@ class Mauticommerce_Err {
  * @return bool
  */
 function mautic_is_activate_woocommerce() {
-	$activePlugins = get_option('active_plugins');
+	$active_plugins = get_option( 'active_plugins' );
 	$plugin = 'woocommerce/woocommerce.php';
-	if ( ! array_search( $plugin, $activePlugins ) && file_exists( WP_PLUGIN_DIR. '/'. $plugin ) ) {
+	if ( ! array_search( $plugin, $active_plugins ) && file_exists( WP_PLUGIN_DIR . '/' . $plugin ) ) {
 		return false;
 	} else {
 		return true;

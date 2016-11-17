@@ -3,7 +3,7 @@ Contributors: amimotoami,megumithemes,hideokamoto,2craig
 Tags: marketing,mautic,woocommerce
 Requires at least: 4.4.2
 Tested up to:4.4.2
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,9 @@ Mautic is a free open source marketing automation tool.
 It can be downloaded at: www.mautic.org/download.
 Mautic may or may not be installed before the Mauticommerce plugin.
 You will need a functioning Mautic installation and a new Mautic Form for this plugin to work.
+
+## Document
+- [API reference: https://amimoto-ami.github.io/mauticommerce/index.html](https://amimoto-ami.github.io/mauticommerce/index.html)
 
 == Installation ==
 
@@ -73,6 +76,9 @@ function add_mapping_query( $query, $order ) {
 * [.svnignore for WordPress plugins](https://github.com/miya0001/wp-svnignore)
 
 == Changelog ==
+= 0.1.1 =
+* Bug fix
+* Create document site
 
 = 0.1.0 =
 * Country & State Mapping for Mautic
@@ -88,5 +94,6 @@ function add_mapping_query( $query, $order ) {
 
 == Upgrade Notice ==
 
-= 0.1.0 =
-* Country & State Mapping for Mautic
+= 0.1.1 =
+* Bug fix
+* Create document site
